@@ -14,7 +14,7 @@ class ConnectionViewController: UIViewController, SocketControllerDelegate {
     @IBOutlet weak var playerNameField: UITextField!
     @IBOutlet weak var logTextView: UITextView!
  
-    let url = NSURL(scheme: "ws", host: "localhost:3000", path: "/")!
+    let url = NSURL(string: "ws://jaywaypongserver.herokuapp.com:80")!
     var socketController: SocketController!
     
     // MARK: view life cycle
