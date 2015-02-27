@@ -44,7 +44,7 @@ struct Step {
         let playerPaddleH = playerPaddle["height"] as CGFloat
         self.playerPaddle = CGRectMake(playerPaddleX, playerPaddleY, playerPaddleW, playerPaddleH)
 
-        let opponentPaddle = json["playerPaddle"] as [String: AnyObject]
+        let opponentPaddle = json["remotePaddle"] as [String: AnyObject]
         let opponentPaddleX = opponentPaddle["x"] as CGFloat
         let opponentPaddleY = opponentPaddle["y"] as CGFloat
         let opponentPaddleW = opponentPaddle["width"] as CGFloat
