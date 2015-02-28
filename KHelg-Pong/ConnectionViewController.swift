@@ -15,6 +15,7 @@ class ConnectionViewController: UIViewController, SocketControllerDelegate {
     @IBOutlet weak var logTextView: UITextView!
  
     let url = NSURL(string: "ws://jaywaypongserver.herokuapp.com:80")!
+//    let url = NSURL(string: "ws://10.0.112.186:3000")!
     var socketController: SocketController!
     
     // MARK: view life cycle
@@ -28,12 +29,15 @@ class ConnectionViewController: UIViewController, SocketControllerDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "play pong" {
             let gameViewController = segue.destinationViewController as GameViewController
-            // implement
+            self.socketController.beginPlaying()
+            gameViewController.socket = self.socketController
         }
     }
     
     @IBAction func connect(sender: UIButton) {
-        self.socketController.connectTo(url)
+        if let playerName = self.playerNameField.text {
+            self.socketController.connectTo(url, player: playerName)
+        }
     }
     
     @IBAction func disconnect(sender: UIButton) {

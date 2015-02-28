@@ -14,9 +14,14 @@ protocol SocketControllerDelegate: class {
     func receivedMessage(socketController: SocketController, message: String)
 }
 
+protocol SocketControllerGamingDelegate: class {
+    func didStep(socketController: SocketController, step: Step)
+}
+
 class SocketController {
     
     weak var delegate: SocketControllerDelegate?
+    weak var gameDelegate: SocketControllerGamingDelegate?
     var socket: SIOSocket?
     
     init(delegate: SocketControllerDelegate) {
@@ -24,16 +29,14 @@ class SocketController {
     }
     
     // Finish implementation
-    func connectTo(url: NSURL) {
+    func connectTo(url: NSURL, player: String) {
         let urlString = url.absoluteString!
         println("Connecting to: \(urlString)")
         
         SIOSocket.socketWithHost(urlString) { (theSocket) -> Void in
-            println("creating the socket")
             self.socket = theSocket
-            println("socket assigned")
-            
             self.socket?.onConnect = {
+                self.socket?.emit("add player", args: [["playername" : player]])
                 dispatch_async(dispatch_get_main_queue()){
                     self.delegate?.connected(self)
                     return
@@ -41,8 +44,8 @@ class SocketController {
             }
             
             self.socket?.on("players", callback: { (result) -> Void in
-                let root = result.first as [String : AnyObject]
-                println("players updated")
+//                let root = result.first as [String : AnyObject]
+//                println("players updated")
             })
             
             self.socket?.on("message", callback: { (message) -> Void in
@@ -60,7 +63,13 @@ class SocketController {
             })
             
             self.socket?.on("step", callback: { (message) -> Void in
-                
+                if let root = message.first as? [String: AnyObject]{
+                    var step = Step(json: root)
+                    dispatch_async(dispatch_get_main_queue()){
+                        self.gameDelegate?.didStep(self, step: step)
+                        return
+                    }
+                }
             })
             
             self.socket?.onError = { (errorInfo) in
@@ -71,6 +80,10 @@ class SocketController {
     
     func disconnect() {
         
+    }
+    
+    func beginPlaying() {
+        self.socket?.emit("ready")
     }
     
     // Implement!
