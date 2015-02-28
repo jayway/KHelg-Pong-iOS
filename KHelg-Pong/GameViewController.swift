@@ -28,15 +28,10 @@ class GameViewController: UIViewController, SocketControllerGamingDelegate {
     
     var accumulatedPos : CGFloat = 0
     
-    @IBOutlet weak var touchPad: UIView!
-    @IBOutlet weak var gameBoard: UIView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
-    
-    @IBOutlet weak var myPaddle: UIView!
-    @IBOutlet weak var opponentPaddle: UIView!
-    
-    
-    @IBOutlet weak var ballView: UIView!
+    @IBOutlet weak var touchPad: UIView!
+    @IBOutlet weak var pongView: PongView!
+
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
@@ -51,16 +46,7 @@ class GameViewController: UIViewController, SocketControllerGamingDelegate {
             println("Player1: \(step.players.player1.name) VS player2: \(step.players.player2.name)")
             self.steeringTimer = NSTimer.scheduledTimerWithTimeInterval(1/10, target: self, selector: Selector("runTimer"), userInfo: nil, repeats: true)
         }
-        var xRatio = step.bounds.width / self.gameBoard.bounds.size.width
-        var yRatio = step.bounds.height / self.gameBoard.bounds.size.height
-        
-        self.ballView.frame.origin.x = step.ball.position.x * xRatio
-        self.ballView.frame.origin.y = step.ball.position.y * yRatio
-        
-        self.opponentPaddle.frame.origin.x = step.opponentPaddle.origin.x * xRatio
-        self.myPaddle.frame.origin.x = step.playerPaddle.origin.x * xRatio
-        
-        self.gameBoard.setNeedsDisplay()
+        self.pongView.step = step
     }
     
     @IBAction func didPan(sender: UIPanGestureRecognizer) {
@@ -71,7 +57,7 @@ class GameViewController: UIViewController, SocketControllerGamingDelegate {
     
     func runTimer() {
         let theMove = ["paddle": ["x": self.accumulatedPos*2, "y": 0]]
-        println("theMove: \(theMove)")
+//        println("theMove: \(theMove)")
         self.socket?.socket?.emit("move", args: [theMove])
         self.accumulatedPos = 0
     }

@@ -10,6 +10,8 @@ import UIKit
 
 class ConnectionViewController: UIViewController, SocketControllerDelegate {
     
+    @IBOutlet weak var connectButton: UIButton!
+    @IBOutlet weak var disconnectButton: UIButton!
     @IBOutlet weak var playButton: UIBarButtonItem!
     @IBOutlet weak var playerNameField: UITextField!
     @IBOutlet weak var logTextView: UITextView!
@@ -23,7 +25,6 @@ class ConnectionViewController: UIViewController, SocketControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.socketController = SocketController(delegate: self)
     }
     
@@ -45,20 +46,23 @@ class ConnectionViewController: UIViewController, SocketControllerDelegate {
         self.socketController.disconnect()
     }
     
+    
+    
     // MARK: SocketControllerDelegate
     
     func connected(socketController: SocketController) {
         self.playButton.enabled = true
-        // TODO: Implement
+        self.disconnectButton.enabled = true
+        self.connectButton.enabled = false
+        
     }
     
     func disconnected(socketController: SocketController) {
         self.playButton.enabled = false
-        // TODO: Implement
+        self.disconnectButton.enabled = false
     }
     
     func receivedMessage(socketController: SocketController, message: String) {
-        // TODO: Implement
         self.logTextView.text = self.logTextView.text + "\n\(message)"
     }
     

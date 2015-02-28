@@ -75,11 +75,17 @@ class SocketController {
             self.socket?.onError = { (errorInfo) in
                 println("Something bad happend: \(errorInfo)")
             }
+            self.socket?.onDisconnect = {
+                dispatch_async(dispatch_get_main_queue()){
+                    self.delegate?.disconnected(self)
+                    return
+                }
+            }
         }
     }
     
     func disconnect() {
-        
+        self.socket?.onDisconnect
     }
     
     func beginPlaying() {

@@ -40,7 +40,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K9G-a8-4Ta">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K9G-a8-4Ta">
                                 <rect key="frame" x="281" y="105" width="78" height="30"/>
                                 <state key="normal" title="Disconnect">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -74,6 +74,8 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="connectButton" destination="y7L-io-JJr" id="wem-m5-Wm0"/>
+                        <outlet property="disconnectButton" destination="K9G-a8-4Ta" id="u9F-nc-Kua"/>
                         <outlet property="logTextView" destination="KUu-Mo-f3b" id="Ubm-fb-5KW"/>
                         <outlet property="playButton" destination="IAR-7J-eXu" id="Q0d-Kv-ixQ"/>
                         <outlet property="playerNameField" destination="fdE-8a-z1t" id="Bep-lT-H0d"/>
@@ -111,70 +113,30 @@
                                     <outletCollection property="gestureRecognizers" destination="OBY-n5-KiK" appends="YES" id="hBr-Gl-s82"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xiH-S0-ERt">
-                                <rect key="frame" x="0.0" y="64" width="375" height="539"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Czl-vH-8sh" userLabel="OpponentPaddle">
-                                        <rect key="frame" x="30" y="10" width="50" height="5"/>
-                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="YOd-3B-Rne"/>
-                                            <constraint firstAttribute="height" constant="5" id="tKh-oe-Fv9"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aql-T6-sOf" userLabel="MyPaddle">
-                                        <rect key="frame" x="20" y="524" width="50" height="5"/>
-                                        <color key="backgroundColor" red="0.011764707040000001" green="0.98431378599999997" blue="0.086274512110000007" alpha="1" colorSpace="deviceRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="SlB-UI-DOa"/>
-                                            <constraint firstAttribute="height" constant="5" id="yAN-Pq-klE"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ne-HF-IuT">
-                                        <rect key="frame" x="116" y="102" width="10" height="10"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="10" id="AeP-iD-izW"/>
-                                            <constraint firstAttribute="width" constant="10" id="RXI-N3-alr"/>
-                                        </constraints>
-                                    </view>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Au9-6R-SZN">
-                                        <rect key="frame" x="0.0" y="-64" width="20" height="20"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.93725496529999996" green="0.96078437569999997" blue="0.98431378599999997" alpha="1" colorSpace="deviceRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Aql-T6-sOf" secondAttribute="trailing" id="3em-yX-h7S"/>
-                                    <constraint firstItem="1ne-HF-IuT" firstAttribute="top" secondItem="xiH-S0-ERt" secondAttribute="top" constant="102" placeholder="YES" id="8Nc-cv-45a" userLabel="ballY"/>
-                                    <constraint firstItem="Czl-vH-8sh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xiH-S0-ERt" secondAttribute="leading" id="BQ1-Hq-PcS"/>
-                                    <constraint firstItem="1ne-HF-IuT" firstAttribute="leading" secondItem="xiH-S0-ERt" secondAttribute="leading" constant="116" placeholder="YES" id="DNa-Rb-4Fe" userLabel="ballX"/>
-                                    <constraint firstItem="Aql-T6-sOf" firstAttribute="leading" secondItem="xiH-S0-ERt" secondAttribute="leading" constant="20" placeholder="YES" id="IPs-yN-yXM" userLabel="myPaddleXconstraint"/>
-                                    <constraint firstItem="Aql-T6-sOf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xiH-S0-ERt" secondAttribute="leading" id="Yfr-C5-LLb"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Czl-vH-8sh" secondAttribute="trailing" id="k0g-6Z-4Jc"/>
-                                    <constraint firstItem="Czl-vH-8sh" firstAttribute="top" secondItem="xiH-S0-ERt" secondAttribute="top" constant="10" id="l9A-Dc-rrg"/>
-                                    <constraint firstAttribute="bottom" secondItem="Aql-T6-sOf" secondAttribute="bottom" constant="10" id="vA3-Z7-wKB"/>
-                                </constraints>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xPT-Qp-ngJ" userLabel="pongView" customClass="PongView" customModule="KHelg_Pong" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="375" height="540"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FZb-Pr-Oko">
+                                <rect key="frame" x="177" y="324" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="xPT-Qp-ngJ" firstAttribute="top" secondItem="6uc-b0-TP9" secondAttribute="bottom" id="5Oj-Lp-PGR"/>
                             <constraint firstItem="09n-b6-Wkw" firstAttribute="leading" secondItem="AZW-ca-RFv" secondAttribute="leading" id="8i4-vT-hb9"/>
                             <constraint firstAttribute="trailing" secondItem="09n-b6-Wkw" secondAttribute="trailing" id="IuP-Ix-1tm"/>
-                            <constraint firstItem="xiH-S0-ERt" firstAttribute="leading" secondItem="AZW-ca-RFv" secondAttribute="leading" id="MIA-Qg-gxg"/>
+                            <constraint firstItem="09n-b6-Wkw" firstAttribute="top" secondItem="xPT-Qp-ngJ" secondAttribute="bottom" constant="-1" id="WzP-DI-u1G"/>
+                            <constraint firstAttribute="trailing" secondItem="xPT-Qp-ngJ" secondAttribute="trailing" id="h4W-bz-ot9"/>
                             <constraint firstAttribute="bottom" secondItem="09n-b6-Wkw" secondAttribute="bottom" id="h6V-XG-1yG"/>
-                            <constraint firstItem="xiH-S0-ERt" firstAttribute="top" secondItem="6uc-b0-TP9" secondAttribute="bottom" id="ifh-U5-MDh"/>
-                            <constraint firstAttribute="trailing" secondItem="xiH-S0-ERt" secondAttribute="trailing" id="pbf-mR-PFg"/>
-                            <constraint firstAttribute="centerY" secondItem="xiH-S0-ERt" secondAttribute="centerY" id="xip-9u-rBU"/>
-                            <constraint firstItem="09n-b6-Wkw" firstAttribute="top" secondItem="xiH-S0-ERt" secondAttribute="bottom" id="yCg-sh-ifE"/>
+                            <constraint firstAttribute="centerY" secondItem="xPT-Qp-ngJ" secondAttribute="centerY" id="jGY-BO-XkA"/>
+                            <constraint firstItem="xPT-Qp-ngJ" firstAttribute="leading" secondItem="AZW-ca-RFv" secondAttribute="leading" id="lKh-XH-evm"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="ballView" destination="1ne-HF-IuT" id="mVX-df-sk1"/>
-                        <outlet property="gameBoard" destination="xiH-S0-ERt" id="Qt8-eb-awi"/>
-                        <outlet property="myPaddle" destination="Aql-T6-sOf" id="Rbr-zo-p9C"/>
-                        <outlet property="opponentPaddle" destination="Czl-vH-8sh" id="ql3-ME-FUg"/>
-                        <outlet property="spinner" destination="Au9-6R-SZN" id="nl5-Yq-dmF"/>
+                        <outlet property="pongView" destination="xPT-Qp-ngJ" id="ckG-Ro-QWm"/>
+                        <outlet property="spinner" destination="FZb-Pr-Oko" id="cCh-c4-A7R"/>
                         <outlet property="touchPad" destination="09n-b6-Wkw" id="2jH-a3-Gyp"/>
                     </connections>
                 </viewController>
