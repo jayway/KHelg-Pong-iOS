@@ -18,6 +18,8 @@ class GameViewController: UIViewController, SocketControllerGamingDelegate {
     
     var first = true
     
+    var steeringTimer : NSTimer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Pong"
@@ -36,14 +38,18 @@ class GameViewController: UIViewController, SocketControllerGamingDelegate {
     
     @IBOutlet weak var ballView: UIView!
     
-    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.steeringTimer?.invalidate()
+        self.first = true
+    }
     
     func didStep(socketController: SocketController, step: Step){
         if  first{
             first = false
             self.spinner.stopAnimating()
             println("Player1: \(step.players.player1.name) VS player2: \(step.players.player2.name)")
-            NSTimer.scheduledTimerWithTimeInterval(1/3, target: self, selector: Selector("runTimer"), userInfo: nil, repeats: true)
+            self.steeringTimer = NSTimer.scheduledTimerWithTimeInterval(1/10, target: self, selector: Selector("runTimer"), userInfo: nil, repeats: true)
         }
         var xRatio = step.bounds.width / self.gameBoard.bounds.size.width
         var yRatio = step.bounds.height / self.gameBoard.bounds.size.height
@@ -53,6 +59,7 @@ class GameViewController: UIViewController, SocketControllerGamingDelegate {
         
         self.opponentPaddle.frame.origin.x = step.opponentPaddle.origin.x * xRatio
         self.myPaddle.frame.origin.x = step.playerPaddle.origin.x * xRatio
+        
         self.gameBoard.setNeedsDisplay()
     }
     
@@ -63,7 +70,7 @@ class GameViewController: UIViewController, SocketControllerGamingDelegate {
     }
     
     func runTimer() {
-        let theMove = ["paddle": ["x": self.accumulatedPos, "y": 0]]
+        let theMove = ["paddle": ["x": self.accumulatedPos*2, "y": 0]]
         println("theMove: \(theMove)")
         self.socket?.socket?.emit("move", args: [theMove])
         self.accumulatedPos = 0

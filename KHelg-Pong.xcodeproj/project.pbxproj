@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		252B40B6AFB8F4E634AC1982 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F99F02B87BE40F259E7283 /* libPods.a */; };
 		489A93291AA0B4CC00122A12 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489A93281AA0B4CC00122A12 /* Step.swift */; };
+		489A932D1AA225C500122A12 /* PongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489A932C1AA225C500122A12 /* PongView.swift */; };
 		C497AFDB975AADCD4D2FD581 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F99F02B87BE40F259E7283 /* libPods.a */; };
 		EF11C8FC1A9E3E02006888BB /* SocketController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF11C8FB1A9E3E02006888BB /* SocketController.swift */; };
 		EFE264FF1A9E3BDB006F7D07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE264FE1A9E3BDB006F7D07 /* AppDelegate.swift */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		01F99F02B87BE40F259E7283 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		489A93281AA0B4CC00122A12 /* Step.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
+		489A932C1AA225C500122A12 /* PongView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PongView.swift; sourceTree = "<group>"; };
 		4D72A50C63C3A8443766F74A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E3C5A78305E213AD868AFF87 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EF11C8FB1A9E3E02006888BB /* SocketController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketController.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				489A93281AA0B4CC00122A12 /* Step.swift */,
 				EFE265201A9E3D24006F7D07 /* ConnectionViewController.swift */,
 				EFE265221A9E3D57006F7D07 /* GameViewController.swift */,
+				489A932C1AA225C500122A12 /* PongView.swift */,
 				EF11C8FB1A9E3E02006888BB /* SocketController.swift */,
 				EFE265041A9E3BDB006F7D07 /* Main.storyboard */,
 				EFE264FC1A9E3BDB006F7D07 /* Supporting Files */,
@@ -320,6 +323,7 @@
 				EFE265231A9E3D57006F7D07 /* GameViewController.swift in Sources */,
 				489A93291AA0B4CC00122A12 /* Step.swift in Sources */,
 				EF11C8FC1A9E3E02006888BB /* SocketController.swift in Sources */,
+				489A932D1AA225C500122A12 /* PongView.swift in Sources */,
 				EFE264FF1A9E3BDB006F7D07 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

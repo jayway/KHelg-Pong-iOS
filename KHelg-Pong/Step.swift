@@ -11,8 +11,8 @@ import UIKit
 
 struct Step {
     let ball: (position: CGPoint, radius: CGFloat)
-    let playerPaddle: CGRect
-    let opponentPaddle: CGRect
+    let playerPaddle: CGRect = CGRectZero
+    let opponentPaddle: CGRect = CGRectZero
     let players: (player1: (name: String, score: Int), player2: (name: String, score: Int))
     let bounds: CGSize
 
@@ -37,18 +37,20 @@ struct Step {
         let height = bounds["height"] as CGFloat
         self.bounds = CGSizeMake(width, height)
 
-        let playerPaddle = json["playerPaddle"] as [String: AnyObject]
-        let playerPaddleX = playerPaddle["x"] as CGFloat
-        let playerPaddleY = playerPaddle["y"] as CGFloat
-        let playerPaddleW = playerPaddle["width"] as CGFloat
-        let playerPaddleH = playerPaddle["height"] as CGFloat
-        self.playerPaddle = CGRectMake(playerPaddleX, playerPaddleY, playerPaddleW, playerPaddleH)
+        if let playerPaddle = json["playerPaddle"] as? [String: AnyObject] {
+            let playerPaddleX = playerPaddle["x"] as CGFloat
+            let playerPaddleY = playerPaddle["y"] as CGFloat
+            let playerPaddleW = playerPaddle["width"] as CGFloat
+            let playerPaddleH = playerPaddle["height"] as CGFloat
+            self.playerPaddle = CGRectMake(playerPaddleX, playerPaddleY, playerPaddleW, playerPaddleH)
+        }
 
-        let opponentPaddle = json["remotePaddle"] as [String: AnyObject]
-        let opponentPaddleX = opponentPaddle["x"] as CGFloat
-        let opponentPaddleY = opponentPaddle["y"] as CGFloat
-        let opponentPaddleW = opponentPaddle["width"] as CGFloat
-        let opponentPaddleH = opponentPaddle["height"] as CGFloat
-        self.opponentPaddle = CGRectMake(opponentPaddleX, opponentPaddleY, opponentPaddleW, opponentPaddleH)
+        if let opponentPaddle = json["remotePaddle"] as? [String: AnyObject] {
+            let opponentPaddleX = opponentPaddle["x"] as CGFloat
+            let opponentPaddleY = opponentPaddle["y"] as CGFloat
+            let opponentPaddleW = opponentPaddle["width"] as CGFloat
+            let opponentPaddleH = opponentPaddle["height"] as CGFloat
+            self.opponentPaddle = CGRectMake(opponentPaddleX, opponentPaddleY, opponentPaddleW, opponentPaddleH)
+        }
     }
 }
