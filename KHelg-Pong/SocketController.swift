@@ -16,6 +16,7 @@ protocol SocketControllerDelegate: class {
 
 protocol SocketControllerGamingDelegate: class {
     func didStep(socketController: SocketController, step: Step)
+    func gameEnded(socketController: SocketController, winner: String)
 }
 
 class SocketController {
@@ -23,7 +24,6 @@ class SocketController {
     weak var delegate: SocketControllerDelegate?
     weak var gameDelegate: SocketControllerGamingDelegate?
     var socket: SIOSocket?
-    var counter = 0
     
     init(delegate: SocketControllerDelegate) {
         self.delegate = delegate
@@ -45,8 +45,8 @@ class SocketController {
             }
             
             self.socket?.on("players", callback: { (result) -> Void in
-//                let root = result.first as [String : AnyObject]
-//                println("players updated")
+                // let root = result.first as [String : AnyObject]
+                // println("players updated")
             })
             
             self.socket?.on("message", callback: { (message) -> Void in
@@ -65,14 +65,21 @@ class SocketController {
             
             self.socket?.on("step", callback: { (message) -> Void in
                 if let root = message.first as? [String: AnyObject]{
-                    self.counter++
-                    if (self.counter % 100 == 0){
-                        println(root)
-                    }
                     var step = Step(json: root)
                     dispatch_async(dispatch_get_main_queue()){
                         self.gameDelegate?.didStep(self, step: step)
                         return
+                    }
+                }
+            })
+            
+            self.socket?.on("winning", callback: { (message) -> Void in
+                if let root = message.first as? [String: AnyObject]{
+                    if let winner = root["winner"] as? String {
+                        dispatch_async(dispatch_get_main_queue()){
+                            self.gameDelegate?.gameEnded(self, winner: winner)
+                            return
+                        }
                     }
                 }
             })
@@ -87,6 +94,10 @@ class SocketController {
                 }
             }
         }
+    }
+    
+    func sendChatMessage(message : String) {
+        self.socket?.emit("message", args: [["message" : message]])
     }
     
     func disconnect() {

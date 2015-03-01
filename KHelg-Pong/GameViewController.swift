@@ -28,6 +28,9 @@ class GameViewController: UIViewController, SocketControllerGamingDelegate {
     
     var accumulatedPos : CGFloat = 0
     
+    @IBOutlet weak var winnerLabel: UILabel!
+    @IBOutlet weak var p1Label: UILabel!
+    @IBOutlet weak var p2Label: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var touchPad: UIView!
     @IBOutlet weak var pongView: PongView!
@@ -43,10 +46,16 @@ class GameViewController: UIViewController, SocketControllerGamingDelegate {
         if  first{
             first = false
             self.spinner.stopAnimating()
-            println("Player1: \(step.players.player1.name) VS player2: \(step.players.player2.name)")
-            self.steeringTimer = NSTimer.scheduledTimerWithTimeInterval(1/10, target: self, selector: Selector("runTimer"), userInfo: nil, repeats: true)
+            self.steeringTimer = NSTimer.scheduledTimerWithTimeInterval(1/30, target: self, selector: Selector("runTimer"), userInfo: nil, repeats: true)
         }
+        self.p1Label.text = "\(step.players.player1.name): \(step.players.player1.score)"
+        self.p2Label.text = "\(step.players.player2.name): \(step.players.player2.score)"
+        
         self.pongView.step = step
+    }
+    
+    func gameEnded(socketController: SocketController, winner: String) {
+        self.winnerLabel.text = "Game Over \n\(winner) won!"
     }
     
     @IBAction func didPan(sender: UIPanGestureRecognizer) {
@@ -56,9 +65,11 @@ class GameViewController: UIViewController, SocketControllerGamingDelegate {
     }
     
     func runTimer() {
-        let theMove = ["paddle": ["x": self.accumulatedPos, "y": 0]]
-        self.socket?.socket?.emit("move", args: [theMove])
-        self.accumulatedPos = 0
+        if accumulatedPos != 0 {
+            let theMove = ["paddle": ["x": self.accumulatedPos, "y": 0]]
+            self.socket?.socket?.emit("move", args: [theMove])
+            self.accumulatedPos = 0
+        }
     }
     
     

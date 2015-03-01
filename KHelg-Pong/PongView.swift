@@ -42,7 +42,7 @@ class PongView: UIView {
             myPaddle.fill()
             
             // Opponent Paddle
-            let opponentPaddleRect = CGRectMake(s.opponentPaddle.origin.x * xRatio,
+            let opponentPaddleRect = CGRectMake(s.opponentPaddle.origin.x * xRatio + inset,
                 s.opponentPaddle.origin.y * yRatio + inset,
                 s.opponentPaddle.width * xRatio + inset,
                 s.opponentPaddle.height * yRatio)
