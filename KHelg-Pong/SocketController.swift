@@ -23,6 +23,7 @@ class SocketController {
     weak var delegate: SocketControllerDelegate?
     weak var gameDelegate: SocketControllerGamingDelegate?
     var socket: SIOSocket?
+    var counter = 0
     
     init(delegate: SocketControllerDelegate) {
         self.delegate = delegate
@@ -64,6 +65,10 @@ class SocketController {
             
             self.socket?.on("step", callback: { (message) -> Void in
                 if let root = message.first as? [String: AnyObject]{
+                    self.counter++
+                    if (self.counter % 100 == 0){
+                        println(root)
+                    }
                     var step = Step(json: root)
                     dispatch_async(dispatch_get_main_queue()){
                         self.gameDelegate?.didStep(self, step: step)

@@ -56,8 +56,7 @@ class GameViewController: UIViewController, SocketControllerGamingDelegate {
     }
     
     func runTimer() {
-        let theMove = ["paddle": ["x": self.accumulatedPos*2, "y": 0]]
-//        println("theMove: \(theMove)")
+        let theMove = ["paddle": ["x": self.accumulatedPos, "y": 0]]
         self.socket?.socket?.emit("move", args: [theMove])
         self.accumulatedPos = 0
     }
