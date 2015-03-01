@@ -37,7 +37,7 @@ class PongView: UIView {
                 s.playerPaddle.origin.y * yRatio + inset,
                 s.playerPaddle.width * xRatio,
                 s.playerPaddle.height * yRatio)
-            let myPaddle = UIBezierPath(rect: myPaddleRect)
+            let myPaddle = UIBezierPath(roundedRect: myPaddleRect, cornerRadius: myPaddleRect.height/2)
             UIColor.greenColor().set()
             myPaddle.fill()
             
@@ -46,7 +46,7 @@ class PongView: UIView {
                 s.opponentPaddle.origin.y * yRatio + inset,
                 s.opponentPaddle.width * xRatio,
                 s.opponentPaddle.height * yRatio)
-            let opPaddle = UIBezierPath(rect: opponentPaddleRect)
+            let opPaddle = UIBezierPath(roundedRect: opponentPaddleRect, cornerRadius: opponentPaddleRect.height/2)
             UIColor.redColor().set()
             opPaddle.fill()
             
