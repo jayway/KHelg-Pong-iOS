@@ -44,7 +44,7 @@ class PongView: UIView {
             // Opponent Paddle
             let opponentPaddleRect = CGRectMake(s.opponentPaddle.origin.x * xRatio + inset,
                 s.opponentPaddle.origin.y * yRatio + inset,
-                s.opponentPaddle.width * xRatio + inset,
+                s.opponentPaddle.width * xRatio,
                 s.opponentPaddle.height * yRatio)
             let opPaddle = UIBezierPath(rect: opponentPaddleRect)
             UIColor.redColor().set()
