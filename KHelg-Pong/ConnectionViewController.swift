@@ -101,6 +101,8 @@ class ConnectionViewController: UIViewController, SocketControllerDelegate, UITe
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     func keyboardDidShow(notification: NSNotification) {
+
+tjenare 
         if let rectValue = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue {
             let keyboardSize = rectValue.CGRectValue().size
             UIView.animateWithDuration(1, animations: { () -> Void in
