@@ -102,7 +102,6 @@ class ConnectionViewController: UIViewController, SocketControllerDelegate, UITe
     
     func keyboardDidShow(notification: NSNotification) {
 
-tjenare 
         if let rectValue = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue {
             let keyboardSize = rectValue.CGRectValue().size
             UIView.animateWithDuration(1, animations: { () -> Void in
